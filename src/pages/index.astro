@@ -114,7 +114,7 @@ const stats = [
 
   <!-- Stats Bar -->
   <section class="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 -mt-12">
-    <div class="rounded-2xl bg-white border border-[var(--color-border)] p-6 shadow-[var(--shadow-xl)]">
+    <div class="rounded-2xl bg-[var(--color-background)] border border-[var(--color-border)] p-6 shadow-[var(--shadow-xl)]">
       <div class="grid grid-cols-2 gap-6 lg:grid-cols-4">
         {stats.map(stat => (
           <div class="text-center">
@@ -127,7 +127,7 @@ const stats = [
   </section>
 
   <!-- Value Proposition Section -->
-  <section class="bg-white py-24 mt-6">
+  <section class="bg-[var(--color-background)] py-24 mt-6">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <div class="text-center">
         <p class="text-sm font-semibold uppercase tracking-wider text-[var(--color-primary)]">Why Choose Us</p>
@@ -139,7 +139,7 @@ const stats = [
 
       <div class="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {valueProps.map(prop => (
-          <div class="group relative rounded-2xl border border-[var(--color-border)] bg-white p-6 transition-all duration-[var(--duration-slow)] hover:-translate-y-1 hover:shadow-lg">
+          <div class="group relative rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] p-6 transition-all duration-[var(--duration-slow)] hover:-translate-y-1 hover:shadow-lg">
             <div class={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-${prop.color}-100 text-${prop.color}-600 transition-transform duration-[var(--duration-slow)] group-hover:scale-110`}>
               {prop.icon === 'star' && (
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -185,7 +185,7 @@ const stats = [
 
       <div class="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {services.map(service => (
-          <div class="group overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white transition-all duration-[var(--duration-slow)] hover:-translate-y-1 hover:shadow-lg">
+          <div class="group overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] transition-all duration-[var(--duration-slow)] hover:-translate-y-1 hover:shadow-lg">
             <div class="relative h-48 overflow-hidden">
               <img
                 src={service.image}
@@ -206,7 +206,7 @@ const stats = [
   </section>
 
   <!-- Testimonial Section -->
-  <section class="bg-white py-24">
+  <section class="bg-[var(--color-background)] py-24">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <div class="text-center">
         <p class="text-sm font-semibold uppercase tracking-wider text-[var(--color-primary)]">Customer Reviews</p>
@@ -218,7 +218,7 @@ const stats = [
           { quote: 'Best vape shop in Forney! They always have what I need and the prices are amazing. Highly recommend to anyone in the area.', source: 'Yelp Review' },
           { quote: 'I drive from Wills Point just to shop here. The staff knows their products and makes every visit a great experience.', source: 'Yahoo Local Review' },
         ].map(t => (
-          <div class="relative rounded-2xl border border-[var(--color-border)] bg-white p-8">
+          <div class="relative rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] p-8">
             <svg class="absolute top-6 right-6 h-8 w-8 text-[var(--color-primary)]/10" fill="currentColor" viewBox="0 0 24 24">
               <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
             </svg>

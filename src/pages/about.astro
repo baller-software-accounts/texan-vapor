@@ -27,7 +27,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   </section>
 
   <!-- Company Story Section -->
-  <section class="bg-white py-24">
+  <section class="bg-[var(--color-background)] py-24">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-center">
         <div>
@@ -80,7 +80,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         <div>
           <p class="text-sm font-semibold uppercase tracking-wider text-[var(--color-primary)]">Our Purpose</p>
           <h2 class="mt-2 text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">Our Mission</h2>
-          <div class="mt-8 rounded-2xl border-l-4 border-[var(--color-primary)] bg-white pl-8 pr-6 py-6 shadow-sm">
+          <div class="mt-8 rounded-2xl border-l-4 border-[var(--color-primary)] bg-[var(--color-background)] pl-8 pr-6 py-6 shadow-sm">
             <blockquote class="text-xl font-medium text-[var(--color-text-primary)] leading-relaxed">
               "To provide the Forney community with quality vaping products, CBD wellness items, and tobacco accessories at unbeatable prices — delivered with genuine care, expert knowledge, and a friendly smile every time."
             </blockquote>
@@ -99,7 +99,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   </section>
 
   <!-- Values Section -->
-  <section class="bg-white py-24">
+  <section class="bg-[var(--color-background)] py-24">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <div class="text-center">
         <p class="text-sm font-semibold uppercase tracking-wider text-[var(--color-primary)]">What Drives Us</p>
@@ -130,7 +130,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             description: 'Our staff stays up to date on products, regulations, and industry trends so you can trust our recommendations.',
           },
         ].map(value => (
-          <div class="group rounded-2xl border border-[var(--color-border)] bg-white p-8 transition-all duration-[var(--duration-slow)] hover:-translate-y-1 hover:shadow-lg">
+          <div class="group rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] p-8 transition-all duration-[var(--duration-slow)] hover:-translate-y-1 hover:shadow-lg">
             <div class={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-${value.color}-100 text-${value.color}-600 transition-transform duration-[var(--duration-slow)] group-hover:scale-110`}>
               {value.icon === 'heart' && (
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
