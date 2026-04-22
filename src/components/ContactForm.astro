@@ -21,8 +21,8 @@ const { endpoint = 'https://formspree.io/f/YOUR_FORM_ID' } = Astro.props;
   <!-- Name + Phone row -->
   <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
     <div>
-      <label for="name" class="block text-sm font-medium text-[--color-text-primary] mb-2">
-        Full Name <span class="text-[--color-error]" aria-hidden="true">*</span>
+      <label for="name" class="block text-sm font-medium text-[var(--color-text-primary)] mb-2">
+        Full Name <span class="text-[var(--color-error)]" aria-hidden="true">*</span>
       </label>
       <input
         type="text"
@@ -31,16 +31,16 @@ const { endpoint = 'https://formspree.io/f/YOUR_FORM_ID' } = Astro.props;
         required
         autocomplete="name"
         placeholder="Jane Smith"
-        class="block w-full rounded-md border border-[--color-border] bg-transparent px-4 py-3 text-sm text-[--color-text-primary] placeholder-[--color-text-disabled] transition-colors duration-[--duration-fast] focus:border-[--color-primary] focus:outline-none focus:ring-2 focus:ring-[--color-primary]/20 min-h-[44px]"
+        class="block w-full rounded-md border border-[var(--color-border)] bg-transparent px-4 py-3 text-sm text-[var(--color-text-primary)] placeholder-[var(--color-text-disabled)] transition-colors duration-[var(--duration-fast)] focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 min-h-[44px]"
         aria-required="true"
         aria-describedby="name-error"
       />
-      <p id="name-error" class="mt-1.5 text-sm text-[--color-error] hidden" role="alert"></p>
+      <p id="name-error" class="mt-1.5 text-sm text-[var(--color-error)] hidden" role="alert"></p>
     </div>
 
     <div>
-      <label for="phone" class="block text-sm font-medium text-[--color-text-primary] mb-2">
-        Phone <span class="text-xs font-normal text-[--color-text-secondary]">(optional)</span>
+      <label for="phone" class="block text-sm font-medium text-[var(--color-text-primary)] mb-2">
+        Phone <span class="text-xs font-normal text-[var(--color-text-secondary)]">(optional)</span>
       </label>
       <input
         type="tel"
@@ -48,17 +48,17 @@ const { endpoint = 'https://formspree.io/f/YOUR_FORM_ID' } = Astro.props;
         name="phone"
         autocomplete="tel"
         placeholder="(945) 555-0100"
-        class="block w-full rounded-md border border-[--color-border] bg-transparent px-4 py-3 text-sm text-[--color-text-primary] placeholder-[--color-text-disabled] transition-colors duration-[--duration-fast] focus:border-[--color-primary] focus:outline-none focus:ring-2 focus:ring-[--color-primary]/20 min-h-[44px]"
+        class="block w-full rounded-md border border-[var(--color-border)] bg-transparent px-4 py-3 text-sm text-[var(--color-text-primary)] placeholder-[var(--color-text-disabled)] transition-colors duration-[var(--duration-fast)] focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 min-h-[44px]"
         aria-describedby="phone-error"
       />
-      <p id="phone-error" class="mt-1.5 text-sm text-[--color-error] hidden" role="alert"></p>
+      <p id="phone-error" class="mt-1.5 text-sm text-[var(--color-error)] hidden" role="alert"></p>
     </div>
   </div>
 
   <!-- Email -->
   <div>
-    <label for="email" class="block text-sm font-medium text-[--color-text-primary] mb-2">
-      Email Address <span class="text-[--color-error]" aria-hidden="true">*</span>
+    <label for="email" class="block text-sm font-medium text-[var(--color-text-primary)] mb-2">
+      Email Address <span class="text-[var(--color-error)]" aria-hidden="true">*</span>
     </label>
     <input
       type="email"
@@ -67,17 +67,17 @@ const { endpoint = 'https://formspree.io/f/YOUR_FORM_ID' } = Astro.props;
       required
       autocomplete="email"
       placeholder="jane@example.com"
-      class="block w-full rounded-md border border-[--color-border] bg-transparent px-4 py-3 text-sm text-[--color-text-primary] placeholder-[--color-text-disabled] transition-colors duration-[--duration-fast] focus:border-[--color-primary] focus:outline-none focus:ring-2 focus:ring-[--color-primary]/20 min-h-[44px]"
+      class="block w-full rounded-md border border-[var(--color-border)] bg-transparent px-4 py-3 text-sm text-[var(--color-text-primary)] placeholder-[var(--color-text-disabled)] transition-colors duration-[var(--duration-fast)] focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 min-h-[44px]"
       aria-required="true"
       aria-describedby="email-error"
     />
-    <p id="email-error" class="mt-1.5 text-sm text-[--color-error] hidden" role="alert"></p>
+    <p id="email-error" class="mt-1.5 text-sm text-[var(--color-error)] hidden" role="alert"></p>
   </div>
 
   <!-- Message -->
   <div>
-    <label for="message" class="block text-sm font-medium text-[--color-text-primary] mb-2">
-      Message <span class="text-[--color-error]" aria-hidden="true">*</span>
+    <label for="message" class="block text-sm font-medium text-[var(--color-text-primary)] mb-2">
+      Message <span class="text-[var(--color-error)]" aria-hidden="true">*</span>
     </label>
     <textarea
       id="message"
@@ -85,18 +85,18 @@ const { endpoint = 'https://formspree.io/f/YOUR_FORM_ID' } = Astro.props;
       required
       rows="5"
       placeholder="Tell us how we can help..."
-      class="block w-full rounded-md border border-[--color-border] bg-transparent px-4 py-3 text-sm text-[--color-text-primary] placeholder-[--color-text-disabled] transition-colors duration-[--duration-fast] focus:border-[--color-primary] focus:outline-none focus:ring-2 focus:ring-[--color-primary]/20 resize-y"
+      class="block w-full rounded-md border border-[var(--color-border)] bg-transparent px-4 py-3 text-sm text-[var(--color-text-primary)] placeholder-[var(--color-text-disabled)] transition-colors duration-[var(--duration-fast)] focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 resize-y"
       aria-required="true"
       aria-describedby="message-error"
     ></textarea>
-    <p id="message-error" class="mt-1.5 text-sm text-[--color-error] hidden" role="alert"></p>
+    <p id="message-error" class="mt-1.5 text-sm text-[var(--color-error)] hidden" role="alert"></p>
   </div>
 
   <!-- Submit -->
   <button
     type="submit"
     id="submit-btn"
-    class="flex w-full items-center justify-center gap-2 rounded-lg bg-[--color-primary] px-6 py-3 text-base font-semibold text-white shadow transition-all duration-[--duration-medium] hover:bg-[--color-primary-dark] hover:-translate-y-0.5 hover:shadow-md disabled:cursor-not-allowed disabled:opacity-50 disabled:translate-y-0 disabled:shadow-none min-h-[48px]"
+    class="flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--color-primary)] px-6 py-3 text-base font-semibold text-white shadow transition-all duration-[var(--duration-medium)] hover:bg-[var(--color-primary-dark)] hover:-translate-y-0.5 hover:shadow-md disabled:cursor-not-allowed disabled:opacity-50 disabled:translate-y-0 disabled:shadow-none min-h-[48px]"
   >
     <span id="submit-text">Send Message</span>
     <svg id="submit-spinner" class="hidden h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
@@ -157,7 +157,7 @@ const { endpoint = 'https://formspree.io/f/YOUR_FORM_ID' } = Astro.props;
     el.textContent = msg;
     el.classList.remove('hidden');
     fields[field].setAttribute('aria-invalid', 'true');
-    fields[field].classList.add('border-[--color-error]');
+    fields[field].classList.add('border-[var(--color-error)]');
   }
 
   function clearError(field: keyof typeof fields) {
@@ -165,7 +165,7 @@ const { endpoint = 'https://formspree.io/f/YOUR_FORM_ID' } = Astro.props;
     el.textContent = '';
     el.classList.add('hidden');
     fields[field].removeAttribute('aria-invalid');
-    fields[field].classList.remove('border-[--color-error]');
+    fields[field].classList.remove('border-[var(--color-error)]');
   }
 
   function validate(): boolean {

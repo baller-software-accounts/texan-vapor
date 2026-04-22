@@ -18,7 +18,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     />
     <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/40"></div>
     <div class="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <p class="text-sm font-semibold uppercase tracking-wider text-[--color-primary-light]">About Us</p>
+      <p class="text-sm font-semibold uppercase tracking-wider text-[var(--color-primary-light)]">About Us</p>
       <h1 class="mt-3 text-4xl font-bold text-white sm:text-5xl">Our Story</h1>
       <p class="mt-4 max-w-xl text-lg text-slate-300">
         From a small local shop to Forney's go-to destination for vaping, CBD, and smoke shop products.
@@ -31,9 +31,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-center">
         <div>
-          <p class="text-sm font-semibold uppercase tracking-wider text-[--color-primary]">Our Background</p>
-          <h2 class="mt-2 text-3xl font-bold text-[--color-text-primary] sm:text-4xl">How It All Started</h2>
-          <div class="mt-6 space-y-4 text-[--color-text-secondary] leading-relaxed">
+          <p class="text-sm font-semibold uppercase tracking-wider text-[var(--color-primary)]">Our Background</p>
+          <h2 class="mt-2 text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">How It All Started</h2>
+          <div class="mt-6 space-y-4 text-[var(--color-text-secondary)] leading-relaxed">
             <p>
               Texan Vapor &amp; CBD was founded with a simple mission: bring a premium vaping and smoke shop experience to the Forney community. We recognized that local residents deserved a dedicated retail destination where they could get expert advice, a wide product selection, and fair prices — all without driving to the big city.
             </p>
@@ -54,7 +54,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
               loading="lazy"
             />
           </div>
-          <div class="absolute -bottom-4 -left-4 rounded-xl bg-[--color-primary] px-5 py-3 text-white shadow-lg">
+          <div class="absolute -bottom-4 -left-4 rounded-xl bg-[var(--color-primary)] px-5 py-3 text-white shadow-lg">
             <p class="text-2xl font-bold">4+</p>
             <p class="text-xs font-medium uppercase tracking-wider text-blue-100">Years Serving Forney</p>
           </div>
@@ -64,7 +64,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   </section>
 
   <!-- Mission Section -->
-  <section class="bg-[--color-surface] py-24">
+  <section class="bg-[var(--color-surface)] py-24">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-center">
         <div class="relative">
@@ -78,14 +78,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           </div>
         </div>
         <div>
-          <p class="text-sm font-semibold uppercase tracking-wider text-[--color-primary]">Our Purpose</p>
-          <h2 class="mt-2 text-3xl font-bold text-[--color-text-primary] sm:text-4xl">Our Mission</h2>
-          <div class="mt-8 rounded-2xl border-l-4 border-[--color-primary] bg-white pl-8 pr-6 py-6 shadow-sm">
-            <blockquote class="text-xl font-medium text-[--color-text-primary] leading-relaxed">
+          <p class="text-sm font-semibold uppercase tracking-wider text-[var(--color-primary)]">Our Purpose</p>
+          <h2 class="mt-2 text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">Our Mission</h2>
+          <div class="mt-8 rounded-2xl border-l-4 border-[var(--color-primary)] bg-white pl-8 pr-6 py-6 shadow-sm">
+            <blockquote class="text-xl font-medium text-[var(--color-text-primary)] leading-relaxed">
               "To provide the Forney community with quality vaping products, CBD wellness items, and tobacco accessories at unbeatable prices — delivered with genuine care, expert knowledge, and a friendly smile every time."
             </blockquote>
           </div>
-          <div class="mt-8 space-y-4 text-[--color-text-secondary] leading-relaxed">
+          <div class="mt-8 space-y-4 text-[var(--color-text-secondary)] leading-relaxed">
             <p>
               We believe every customer deserves to be treated like a neighbor — because in Forney, you often are. Our staff takes the time to understand your needs and preferences, ensuring you leave with exactly the right product.
             </p>
@@ -102,9 +102,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <section class="bg-white py-24">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <div class="text-center">
-        <p class="text-sm font-semibold uppercase tracking-wider text-[--color-primary]">What Drives Us</p>
-        <h2 class="mt-2 text-3xl font-bold text-[--color-text-primary] sm:text-4xl">Our Core Values</h2>
-        <p class="mx-auto mt-4 max-w-2xl text-[--color-text-secondary]">
+        <p class="text-sm font-semibold uppercase tracking-wider text-[var(--color-primary)]">What Drives Us</p>
+        <h2 class="mt-2 text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">Our Core Values</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-[var(--color-text-secondary)]">
           These principles guide everything we do — from how we stock our shelves to how we treat every customer.
         </p>
       </div>
@@ -130,8 +130,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             description: 'Our staff stays up to date on products, regulations, and industry trends so you can trust our recommendations.',
           },
         ].map(value => (
-          <div class="group rounded-2xl border border-[--color-border] bg-white p-8 transition-all duration-[--duration-slow] hover:-translate-y-1 hover:shadow-lg">
-            <div class={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-${value.color}-100 text-${value.color}-600 transition-transform duration-[--duration-slow] group-hover:scale-110`}>
+          <div class="group rounded-2xl border border-[var(--color-border)] bg-white p-8 transition-all duration-[var(--duration-slow)] hover:-translate-y-1 hover:shadow-lg">
+            <div class={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-${value.color}-100 text-${value.color}-600 transition-transform duration-[var(--duration-slow)] group-hover:scale-110`}>
               {value.icon === 'heart' && (
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
@@ -148,8 +148,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
                 </svg>
               )}
             </div>
-            <h3 class="text-lg font-semibold text-[--color-text-primary]">{value.title}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-[--color-text-secondary]">{value.description}</p>
+            <h3 class="text-lg font-semibold text-[var(--color-text-primary)]">{value.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">{value.description}</p>
           </div>
         ))}
       </div>
@@ -164,7 +164,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       class="absolute inset-0 h-full w-full object-cover"
       loading="lazy"
     />
-    <div class="absolute inset-0 bg-gradient-to-r from-[--color-primary]/95 via-[--color-primary]/90 to-[--color-primary-dark]/90"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-primary)]/95 via-[var(--color-primary)]/90 to-[var(--color-primary-dark)]/90"></div>
     <div class="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl font-bold text-white sm:text-4xl">Come Visit Us</h2>
       <p class="mx-auto mt-4 max-w-xl text-lg text-blue-100">
@@ -173,13 +173,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
         <a
           href={`${base}/contact`}
-          class="flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-base font-semibold text-[--color-primary] shadow transition-all duration-[--duration-medium] hover:-translate-y-0.5 hover:shadow-lg"
+          class="flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-base font-semibold text-[var(--color-primary)] shadow transition-all duration-[var(--duration-medium)] hover:-translate-y-0.5 hover:shadow-lg"
         >
           Contact Us
         </a>
         <a
           href="tel:+19453304500"
-          class="flex items-center gap-2 rounded-lg border-2 border-white/30 px-6 py-3 text-base font-semibold text-white transition-all duration-[--duration-medium] hover:bg-white/10 hover:-translate-y-0.5"
+          class="flex items-center gap-2 rounded-lg border-2 border-white/30 px-6 py-3 text-base font-semibold text-white transition-all duration-[var(--duration-medium)] hover:bg-white/10 hover:-translate-y-0.5"
         >
           <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />

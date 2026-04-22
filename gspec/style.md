@@ -155,9 +155,9 @@ Standard 4px grid system.
 
 ### Navigation Elements
 
-- **Header**: Sticky top with glassmorphic background: `bg-[--color-background]/80 backdrop-blur-lg`. Border-bottom in `--color-border`.
+- **Header**: Sticky top with glassmorphic background: `bg-[var(--color-background)]/80 backdrop-blur-lg`. Border-bottom in `--color-border`.
 - **Logo**: Icon mark (9x9 `rounded-lg` primary background) + text wordmark. Subtitle in 11px uppercase tracking-wider.
-- **Nav Links**: `rounded-lg px-4 py-2`. Active state: `bg-primary/10 text-primary`. Hover: `bg-[--color-surface]`.
+- **Nav Links**: `rounded-lg px-4 py-2`. Active state: `bg-primary/10 text-primary`. Hover: `bg-[var(--color-surface)]`.
 - **Phone CTA in Nav**: Primary button with phone icon, always visible in desktop nav. Full-width in mobile menu.
 - **Mobile Menu**: Hamburger toggles to X icon. Menu panel with stacked links + full-width phone CTA button at bottom.
 
@@ -194,7 +194,7 @@ Layered elevation system — elements gain shadow on interaction or when floatin
 
 ### Glassmorphism
 
-- **Header**: `bg-[--color-background]/80 backdrop-blur-lg` for a frosted-glass sticky header effect.
+- **Header**: `bg-[var(--color-background)]/80 backdrop-blur-lg` for a frosted-glass sticky header effect.
 - **Hero badges**: `bg-white/10 backdrop-blur-sm border-white/20` for floating labels on dark hero backgrounds.
 
 ---
@@ -213,7 +213,7 @@ Two hero variants are used across the site. **Every hero must ship with a real b
 Every major content section follows this pattern:
 1. Small uppercase label: `text-sm font-semibold uppercase tracking-wider text-primary`
 2. H2 heading: `mt-2 text-3xl font-bold sm:text-4xl`
-3. Optional subtitle: `mx-auto mt-4 max-w-2xl text-[--color-text-secondary]`
+3. Optional subtitle: `mx-auto mt-4 max-w-2xl text-[var(--color-text-secondary)]`
 4. All centered (`text-center`) unless the section uses a side-by-side layout.
 
 ### Floating / Overlapping Elements
