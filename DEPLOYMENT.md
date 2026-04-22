@@ -45,9 +45,8 @@ This triggers a new deployment with the reverted code. Alternatively, use GitHub
 
 ## Domain & DNS
 
-The site is currently configured for the custom domain `texanvaporandcbd.com` in `astro.config.mjs`. To change this:
+The site is served from `https://client.baller.software/texan-vapor` as a GitHub Pages project site — `site` and `base` are set accordingly in `astro.config.mjs`. To change this:
 
-1. Update `site` in `astro.config.mjs`
-2. If using a GitHub Pages project subdomain (`username.github.io/repo`), set `base: '/repo-name'` in `astro.config.mjs`
-3. Configure your DNS provider to point the domain to GitHub Pages (CNAME to `username.github.io`)
-4. Add the custom domain in GitHub repo Settings → Pages → Custom domain
+1. Update `site` (and `base`, if the subpath changes) in `astro.config.mjs`
+2. If moving to a custom domain at the root, remove `base` so links resolve at `/` again
+3. Configure DNS / GitHub Pages settings to match the new target
