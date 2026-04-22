@@ -1,0 +1,371 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<!-- Floating Chat Widget -->
+<div id="chat-widget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3" style="max-width: calc(100vw - 3rem);">
+  <!-- Chat Panel -->
+  <div
+    id="chat-panel"
+    class="hidden flex-col overflow-hidden rounded-2xl border border-[--color-border] bg-white shadow-[--shadow-xl]"
+    style="width: min(384px, calc(100vw - 3rem)); height: 520px;"
+    role="dialog"
+    aria-label="Chat assistant"
+    aria-modal="false"
+  >
+    <!-- Header -->
+    <div class="flex items-center justify-between bg-[--color-primary] px-4 py-3 text-white shrink-0">
+      <div class="flex items-center gap-2">
+        <span class="relative flex h-2 w-2">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-300 opacity-75"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-400"></span>
+        </span>
+        <h2 class="text-sm font-semibold">Texan Vapor Assistant</h2>
+      </div>
+      <button
+        id="chat-close"
+        aria-label="Close chat"
+        class="flex h-7 w-7 items-center justify-center rounded-lg text-white/70 hover:bg-white/20 hover:text-white transition-colors"
+      >
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Demo banner -->
+    <div class="shrink-0 bg-amber-50 border-b border-amber-200 px-4 py-2 text-xs text-amber-700 leading-snug">
+      <strong>Demo Preview</strong> — this shows what an AI assistant could do for your business website.
+    </div>
+
+    <!-- Messages -->
+    <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3 min-h-0">
+    </div>
+
+    <!-- Quick replies -->
+    <div id="quick-replies" class="shrink-0 px-4 py-3 border-t border-[--color-border] flex flex-wrap gap-2 max-h-32 overflow-y-auto">
+    </div>
+
+    <!-- Text input -->
+    <div class="shrink-0 px-4 py-3 border-t border-[--color-border]">
+      <div class="flex gap-2">
+        <label for="chat-input" class="sr-only">Type a message</label>
+        <input
+          type="text"
+          id="chat-input"
+          placeholder="Type a message..."
+          autocomplete="off"
+          class="min-w-0 flex-1 rounded-lg border border-[--color-border] px-3 py-2 text-sm text-[--color-text-primary] placeholder-[--color-text-disabled] focus:border-[--color-primary] focus:outline-none focus:ring-2 focus:ring-[--color-primary]/20"
+        />
+        <button
+          id="chat-send"
+          aria-label="Send message"
+          class="flex items-center justify-center rounded-lg bg-[--color-primary] px-3 py-2 text-white transition-colors hover:bg-[--color-primary-dark]"
+        >
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bubble button -->
+  <button
+    id="chat-bubble"
+    aria-label="Open chat assistant"
+    aria-expanded="false"
+    aria-controls="chat-panel"
+    class="flex h-14 w-14 items-center justify-center rounded-full bg-[--color-primary] text-white shadow-[--shadow-lg] transition-all duration-[--duration-medium] hover:bg-[--color-primary-dark] hover:scale-105 hover:-translate-y-0.5 hover:shadow-[--shadow-xl]"
+  >
+    <svg id="bubble-chat-icon" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
+    </svg>
+    <svg id="bubble-close-icon" class="hidden h-7 w-7" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+    </svg>
+  </button>
+</div>
+
+<script define:vars={{ base }}>
+// ---- Conversation data ----
+const NODES = {
+  welcome: {
+    messages: [
+      "👋 Hi there! I'm a demo AI assistant for Texan Vapor & CBD.",
+      "I can help answer questions about services, hours, and more. What can I help you with today?",
+    ],
+    replies: [
+      { label: '🛍️ Our Products', next: 'services' },
+      { label: '📞 Contact & Hours', next: 'contact' },
+      { label: '❓ FAQs', next: 'faq' },
+    ],
+  },
+  services: {
+    messages: ['We carry a great selection of products! Which category interests you?'],
+    replies: [
+      { label: '💨 Vape Products', next: 'vape' },
+      { label: '🌿 CBD & Hemp', next: 'cbd' },
+      { label: '🚬 Tobacco & Cigars', next: 'tobacco' },
+      { label: '🛒 Smoke Shop', next: 'smoke_shop' },
+      { label: '← Back', next: 'welcome' },
+    ],
+  },
+  vape: {
+    messages: [
+      "We carry a wide range of vaping devices, mods, pod systems, and e-liquids from top brands!",
+      "Whether you're a beginner or an enthusiast, our staff will help you find the perfect setup.",
+    ],
+    replies: [
+      { label: '✉️ Contact the Store', next: 'contact' },
+      { label: '← Browse Products', next: 'services' },
+      { label: '🏠 Back to Start', next: 'welcome' },
+    ],
+  },
+  cbd: {
+    messages: [
+      "Our CBD & hemp section features high-quality oils, tinctures, gummies, topicals, and more!",
+      "Our knowledgeable staff can help you find the right product for your wellness goals.",
+    ],
+    replies: [
+      { label: '📞 Ask a Question', next: 'contact' },
+      { label: '← Browse Products', next: 'services' },
+    ],
+  },
+  tobacco: {
+    messages: [
+      "We stock traditional tobacco, premium cigars, rolling supplies, pipe tobacco, and more — a great selection for the classic smoking enthusiast.",
+    ],
+    replies: [
+      { label: '📞 Contact the Store', next: 'contact' },
+      { label: '← Browse Products', next: 'services' },
+    ],
+  },
+  smoke_shop: {
+    messages: [
+      "Our smoke shop section has everything: pipes, grinders, rolling papers, wraps, and more accessories — all in one convenient Forney location!",
+    ],
+    replies: [
+      { label: '📞 Contact the Store', next: 'contact' },
+      { label: '← Browse Products', next: 'services' },
+    ],
+  },
+  contact: {
+    messages: [
+      "Here's how to reach us:",
+      "📍 1102 Ranch Rd. Ste 218, Forney, TX 75126\n📞 (945) 330-4500\n🕐 Mon–Sat: 9 AM – 9 PM  |  Sun: 11 AM – 7 PM",
+    ],
+    replies: [
+      { label: '📞 Call Now', href: 'tel:+19453304500' },
+      { label: '✉️ Send a Message', href: `${base}/contact` },
+      { label: '← Back to Start', next: 'welcome' },
+    ],
+  },
+  faq: {
+    messages: ["Here are some common questions — pick one:"],
+    replies: [
+      { label: 'How long have you been open?', next: 'faq_years' },
+      { label: 'What areas do you serve?', next: 'faq_area' },
+      { label: 'Are you licensed?', next: 'faq_licensed' },
+      { label: "What are prices like?", next: 'faq_prices' },
+      { label: '← Back', next: 'welcome' },
+    ],
+  },
+  faq_years: {
+    messages: [
+      "Texan Vapor & CBD has been proudly serving Forney for over 4 years! We've built a loyal following thanks to our friendly staff and great product selection.",
+    ],
+    replies: [
+      { label: '← More FAQs', next: 'faq' },
+      { label: '✉️ Contact Us', href: `${base}/contact` },
+    ],
+  },
+  faq_area: {
+    messages: [
+      "We primarily serve Forney and surrounding communities including Wills Point, Quinlan, and Seagoville. Stop by at 1102 Ranch Rd. Ste 218!",
+    ],
+    replies: [
+      { label: '← More FAQs', next: 'faq' },
+      { label: '📍 Get Directions', next: 'contact' },
+    ],
+  },
+  faq_licensed: {
+    messages: [
+      "Yes! We operate as a fully licensed retail business in compliance with all Texas regulations for vaping, tobacco, and CBD products. Your safety is our priority.",
+    ],
+    replies: [
+      { label: '← More FAQs', next: 'faq' },
+      { label: '✉️ Contact Us', href: `${base}/contact` },
+    ],
+  },
+  faq_prices: {
+    messages: [
+      "We pride ourselves on unbeatable prices! We aim to match or beat online retailers while giving you the advantage of in-person expert guidance.",
+      "Come in and compare — we're confident you'll be satisfied.",
+    ],
+    replies: [
+      { label: '← More FAQs', next: 'faq' },
+      { label: '✉️ Get in Touch', href: `${base}/contact` },
+    ],
+  },
+};
+
+// ---- Keyword matching ----
+const KEYWORDS = [
+  { patterns: [/\bhour/i, /\bopen/i, /\bclose/i, /\bschedul/i, /\btime/i], next: 'contact' },
+  { patterns: [/\bphone/i, /\bcall/i, /\bnumber/i, /\bcontact/i, /\breach/i], next: 'contact' },
+  { patterns: [/\baddress/i, /\blocation/i, /\bdirection/i, /\bwhere/i, /\bmap/i], next: 'contact' },
+  { patterns: [/\bvape/i, /\bvaping/i, /\be-?liquid/i, /\bjuice/i, /\bmod/i, /\bpod/i, /\bdevice/i], next: 'vape' },
+  { patterns: [/\bcbd/i, /\bhemp/i, /\bcannabi/i, /\boil/i, /\btincture/i, /\bgumm/i], next: 'cbd' },
+  { patterns: [/\btobacco/i, /\bcigar/i, /\bsmok/i, /\bpipe/i, /\brolling/i], next: 'tobacco' },
+  { patterns: [/\bpric/i, /\bcost/i, /\bhow much/i, /\bexpens/i, /\bafford/i], next: 'faq_prices' },
+  { patterns: [/\bquote/i, /\bserv/i, /\bproduct/i, /\bwhat do/i, /\boffer/i], next: 'services' },
+  { patterns: [/\bfaq/i, /\bquestion/i, /\bwonder/i], next: 'faq' },
+  { patterns: [/\bhello/i, /\bhi\b/i, /\bhey/i, /\bgreet/i], next: 'welcome' },
+];
+
+// ---- DOM references ----
+const bubble = document.getElementById('chat-bubble');
+const panel = document.getElementById('chat-panel');
+const closeBtn = document.getElementById('chat-close');
+const messagesEl = document.getElementById('chat-messages');
+const repliesEl = document.getElementById('quick-replies');
+const input = document.getElementById('chat-input');
+const sendBtn = document.getElementById('chat-send');
+const bubbleChatIcon = document.getElementById('bubble-chat-icon');
+const bubbleCloseIcon = document.getElementById('bubble-close-icon');
+
+let isOpen = false;
+let initialized = false;
+
+// ---- Open / Close ----
+function openChat() {
+  panel?.classList.remove('hidden');
+  panel?.classList.add('flex');
+  bubble?.setAttribute('aria-expanded', 'true');
+  bubble?.setAttribute('aria-label', 'Close chat assistant');
+  bubbleChatIcon?.classList.add('hidden');
+  bubbleCloseIcon?.classList.remove('hidden');
+  isOpen = true;
+  if (!initialized) {
+    initialized = true;
+    goToNode('welcome');
+  }
+  setTimeout(() => input?.focus(), 50);
+}
+
+function closeChat() {
+  panel?.classList.add('hidden');
+  panel?.classList.remove('flex');
+  bubble?.setAttribute('aria-expanded', 'false');
+  bubble?.setAttribute('aria-label', 'Open chat assistant');
+  bubbleChatIcon?.classList.remove('hidden');
+  bubbleCloseIcon?.classList.add('hidden');
+  isOpen = false;
+}
+
+bubble?.addEventListener('click', () => (isOpen ? closeChat() : openChat()));
+closeBtn?.addEventListener('click', closeChat);
+
+// ---- Render helpers ----
+function addMessage(text, isUser = false) {
+  const div = document.createElement('div');
+  div.className = isUser
+    ? 'flex justify-end'
+    : 'flex justify-start';
+
+  const bubble = document.createElement('div');
+  bubble.className = isUser
+    ? 'max-w-[80%] rounded-2xl rounded-tr-sm bg-[--color-primary] px-4 py-2.5 text-sm text-white'
+    : 'max-w-[80%] rounded-2xl rounded-tl-sm border border-[--color-border] bg-[--color-surface] px-4 py-2.5 text-sm text-[--color-text-primary]';
+  bubble.style.whiteSpace = 'pre-wrap';
+  bubble.textContent = text;
+  div.appendChild(bubble);
+  messagesEl?.appendChild(div);
+  scrollToBottom();
+}
+
+function scrollToBottom() {
+  if (messagesEl) messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function renderReplies(replies) {
+  if (!repliesEl) return;
+  repliesEl.innerHTML = '';
+  replies.forEach(reply => {
+    const btn = document.createElement(reply.href ? 'a' : 'button');
+    btn.className =
+      'inline-flex items-center rounded-full border border-[--color-primary] px-3 py-1.5 text-xs font-medium text-[--color-primary] transition-colors hover:bg-[--color-primary] hover:text-white';
+    btn.textContent = reply.label;
+
+    if (reply.href) {
+      (btn).href = reply.href;
+      if (!reply.href.startsWith('tel:')) {
+        (btn).target = '_self';
+      }
+    } else {
+      btn.addEventListener('click', () => handleReplyClick(reply));
+    }
+
+    repliesEl.appendChild(btn);
+  });
+}
+
+function handleReplyClick(reply) {
+  addMessage(reply.label, true);
+  repliesEl && (repliesEl.innerHTML = '');
+  setTimeout(() => {
+    if (reply.next) goToNode(reply.next);
+  }, 300);
+}
+
+// ---- Conversation navigation ----
+function goToNode(nodeKey) {
+  const node = NODES[nodeKey];
+  if (!node) return;
+
+  let delay = 0;
+  node.messages.forEach(msg => {
+    setTimeout(() => {
+      addMessage(msg, false);
+      if (node.replies && node.messages.indexOf(msg) === node.messages.length - 1) {
+        renderReplies(node.replies);
+      }
+    }, delay);
+    delay += 400;
+  });
+}
+
+// ---- Free text input ----
+function handleUserInput() {
+  const text = (input)?.value?.trim();
+  if (!text) return;
+  (input).value = '';
+  addMessage(text, true);
+  repliesEl && (repliesEl.innerHTML = '');
+
+  const lowerText = text.toLowerCase();
+  const match = KEYWORDS.find(kw => kw.patterns.some(p => p.test(lowerText)));
+
+  setTimeout(() => {
+    if (match) {
+      goToNode(match.next);
+    } else {
+      addMessage(
+        "I'm not sure I understood that! Try using the quick-reply buttons below, or contact us directly at (945) 330-4500.",
+        false
+      );
+      renderReplies([
+        { label: '🛍️ Our Products', next: 'services' },
+        { label: '📞 Contact & Hours', next: 'contact' },
+        { label: '❓ FAQs', next: 'faq' },
+      ]);
+    }
+  }, 400);
+}
+
+sendBtn?.addEventListener('click', handleUserInput);
+input?.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') handleUserInput();
+});
+</script>

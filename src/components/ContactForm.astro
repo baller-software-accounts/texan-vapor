@@ -1,0 +1,257 @@
+---
+interface Props {
+  endpoint?: string;
+}
+const { endpoint = 'https://formspree.io/f/YOUR_FORM_ID' } = Astro.props;
+---
+
+<form
+  id="contact-form"
+  data-endpoint={endpoint}
+  novalidate
+  class="space-y-6"
+  aria-label="Contact form"
+>
+  <!-- Honeypot — hidden from humans, traps bots -->
+  <div class="hidden" aria-hidden="true">
+    <label for="website">Website (leave blank)</label>
+    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <!-- Name + Phone row -->
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+    <div>
+      <label for="name" class="block text-sm font-medium text-[--color-text-primary] mb-2">
+        Full Name <span class="text-[--color-error]" aria-hidden="true">*</span>
+      </label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        required
+        autocomplete="name"
+        placeholder="Jane Smith"
+        class="block w-full rounded-md border border-[--color-border] bg-transparent px-4 py-3 text-sm text-[--color-text-primary] placeholder-[--color-text-disabled] transition-colors duration-[--duration-fast] focus:border-[--color-primary] focus:outline-none focus:ring-2 focus:ring-[--color-primary]/20 min-h-[44px]"
+        aria-required="true"
+        aria-describedby="name-error"
+      />
+      <p id="name-error" class="mt-1.5 text-sm text-[--color-error] hidden" role="alert"></p>
+    </div>
+
+    <div>
+      <label for="phone" class="block text-sm font-medium text-[--color-text-primary] mb-2">
+        Phone <span class="text-xs font-normal text-[--color-text-secondary]">(optional)</span>
+      </label>
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        autocomplete="tel"
+        placeholder="(945) 555-0100"
+        class="block w-full rounded-md border border-[--color-border] bg-transparent px-4 py-3 text-sm text-[--color-text-primary] placeholder-[--color-text-disabled] transition-colors duration-[--duration-fast] focus:border-[--color-primary] focus:outline-none focus:ring-2 focus:ring-[--color-primary]/20 min-h-[44px]"
+        aria-describedby="phone-error"
+      />
+      <p id="phone-error" class="mt-1.5 text-sm text-[--color-error] hidden" role="alert"></p>
+    </div>
+  </div>
+
+  <!-- Email -->
+  <div>
+    <label for="email" class="block text-sm font-medium text-[--color-text-primary] mb-2">
+      Email Address <span class="text-[--color-error]" aria-hidden="true">*</span>
+    </label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      required
+      autocomplete="email"
+      placeholder="jane@example.com"
+      class="block w-full rounded-md border border-[--color-border] bg-transparent px-4 py-3 text-sm text-[--color-text-primary] placeholder-[--color-text-disabled] transition-colors duration-[--duration-fast] focus:border-[--color-primary] focus:outline-none focus:ring-2 focus:ring-[--color-primary]/20 min-h-[44px]"
+      aria-required="true"
+      aria-describedby="email-error"
+    />
+    <p id="email-error" class="mt-1.5 text-sm text-[--color-error] hidden" role="alert"></p>
+  </div>
+
+  <!-- Message -->
+  <div>
+    <label for="message" class="block text-sm font-medium text-[--color-text-primary] mb-2">
+      Message <span class="text-[--color-error]" aria-hidden="true">*</span>
+    </label>
+    <textarea
+      id="message"
+      name="message"
+      required
+      rows="5"
+      placeholder="Tell us how we can help..."
+      class="block w-full rounded-md border border-[--color-border] bg-transparent px-4 py-3 text-sm text-[--color-text-primary] placeholder-[--color-text-disabled] transition-colors duration-[--duration-fast] focus:border-[--color-primary] focus:outline-none focus:ring-2 focus:ring-[--color-primary]/20 resize-y"
+      aria-required="true"
+      aria-describedby="message-error"
+    ></textarea>
+    <p id="message-error" class="mt-1.5 text-sm text-[--color-error] hidden" role="alert"></p>
+  </div>
+
+  <!-- Submit -->
+  <button
+    type="submit"
+    id="submit-btn"
+    class="flex w-full items-center justify-center gap-2 rounded-lg bg-[--color-primary] px-6 py-3 text-base font-semibold text-white shadow transition-all duration-[--duration-medium] hover:bg-[--color-primary-dark] hover:-translate-y-0.5 hover:shadow-md disabled:cursor-not-allowed disabled:opacity-50 disabled:translate-y-0 disabled:shadow-none min-h-[48px]"
+  >
+    <span id="submit-text">Send Message</span>
+    <svg id="submit-spinner" class="hidden h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4z"></path>
+    </svg>
+  </button>
+
+  <!-- Success message -->
+  <div
+    id="form-success"
+    class="hidden rounded-xl border border-emerald-200 bg-emerald-50 p-6 text-center"
+    role="status"
+    aria-live="polite"
+  >
+    <svg class="mx-auto mb-3 h-10 w-10 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+    </svg>
+    <h3 class="text-base font-semibold text-emerald-800">Message sent!</h3>
+    <p class="mt-1 text-sm text-emerald-700">Thank you for reaching out. We'll get back to you as soon as possible.</p>
+  </div>
+
+  <!-- Error message -->
+  <div
+    id="form-error"
+    class="hidden rounded-xl border border-red-200 bg-red-50 p-4"
+    role="alert"
+    aria-live="assertive"
+  >
+    <p class="text-sm font-medium text-red-800">Something went wrong — please try again or contact us by phone at <a href="tel:+19453304500" class="underline">(945) 330-4500</a>.</p>
+  </div>
+</form>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  if (!form) throw new Error('Contact form not found');
+
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const submitText = document.getElementById('submit-text') as HTMLElement;
+  const submitSpinner = document.getElementById('submit-spinner') as HTMLElement;
+  const successMsg = document.getElementById('form-success') as HTMLElement;
+  const errorMsg = document.getElementById('form-error') as HTMLElement;
+
+  const fields = {
+    name: document.getElementById('name') as HTMLInputElement,
+    email: document.getElementById('email') as HTMLInputElement,
+    message: document.getElementById('message') as HTMLTextAreaElement,
+  };
+
+  const errorEls = {
+    name: document.getElementById('name-error') as HTMLElement,
+    email: document.getElementById('email-error') as HTMLElement,
+    message: document.getElementById('message-error') as HTMLElement,
+  };
+
+  function showError(field: keyof typeof fields, msg: string) {
+    const el = errorEls[field];
+    el.textContent = msg;
+    el.classList.remove('hidden');
+    fields[field].setAttribute('aria-invalid', 'true');
+    fields[field].classList.add('border-[--color-error]');
+  }
+
+  function clearError(field: keyof typeof fields) {
+    const el = errorEls[field];
+    el.textContent = '';
+    el.classList.add('hidden');
+    fields[field].removeAttribute('aria-invalid');
+    fields[field].classList.remove('border-[--color-error]');
+  }
+
+  function validate(): boolean {
+    let valid = true;
+
+    if (!fields.name.value.trim()) {
+      showError('name', 'Name is required.');
+      valid = false;
+    } else {
+      clearError('name');
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!fields.email.value.trim()) {
+      showError('email', 'Email address is required.');
+      valid = false;
+    } else if (!emailPattern.test(fields.email.value.trim())) {
+      showError('email', 'Please enter a valid email address.');
+      valid = false;
+    } else {
+      clearError('email');
+    }
+
+    if (!fields.message.value.trim()) {
+      showError('message', 'Message is required.');
+      valid = false;
+    } else {
+      clearError('message');
+    }
+
+    return valid;
+  }
+
+  // Clear errors on input
+  Object.entries(fields).forEach(([key, el]) => {
+    el.addEventListener('input', () => clearError(key as keyof typeof fields));
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (!validate()) {
+      const firstError = Object.values(fields).find(f => f.getAttribute('aria-invalid') === 'true');
+      firstError?.focus();
+      return;
+    }
+
+    // Honeypot check
+    const honeypot = form.querySelector<HTMLInputElement>('input[name="website"]');
+    if (honeypot?.value) return; // silently discard
+
+    const endpoint = form.dataset.endpoint || '';
+
+    submitBtn.disabled = true;
+    submitText.textContent = 'Sending...';
+    submitSpinner.classList.remove('hidden');
+    errorMsg.classList.add('hidden');
+
+    const payload = {
+      name: fields.name.value.trim(),
+      email: fields.email.value.trim(),
+      phone: (form.querySelector<HTMLInputElement>('#phone'))?.value.trim() || '',
+      message: fields.message.value.trim(),
+    };
+
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        form.reset();
+        form.classList.add('hidden');
+        successMsg.classList.remove('hidden');
+      } else {
+        errorMsg.classList.remove('hidden');
+        submitBtn.disabled = false;
+      }
+    } catch {
+      errorMsg.classList.remove('hidden');
+      submitBtn.disabled = false;
+    } finally {
+      submitText.textContent = 'Send Message';
+      submitSpinner.classList.add('hidden');
+    }
+  });
+</script>
